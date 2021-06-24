@@ -1,0 +1,18 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  simple_deployment_pipeline: # set up environment
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2  # runs a specific action - public action (checks out project source code from git)
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: npm install
+        run: npm install
+
