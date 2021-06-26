@@ -34,4 +34,6 @@ jobs:
           heroku_app_name: "pokedex-zim"
           heroku_email: "vadzimkk@gmail.com"
           healthcheck: "pokedex-zim.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackoncheckfailed: true
 
