@@ -5,8 +5,8 @@ on:
     branches:
       - master
   pull_request:
-    branches: [master]
-    types: [opened, synchronize]
+    branches: [ master ]
+    types: [ opened, synchronize ] #    will run on pull request
 
 jobs:
   simple_deployment_pipeline: # set up environment
@@ -30,9 +30,9 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      -  name: deploy
-         uses: akhileshns/heroku-deploy@v3.12.12
-         with:
+      - name: deploy
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
           heroku_api_key: ${{secrets.HEROKU_AUTH_TOKEN}}
           heroku_app_name: "pokedex-zim"
           heroku_email: "vadzimkk@gmail.com"
