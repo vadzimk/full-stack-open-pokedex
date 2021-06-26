@@ -31,7 +31,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: deploy
-        if: {{github.event_name==push}}  # runs only on push to master or pull_request merge with master
+        if: ${{ github.event_name == 'push' }}  # runs only on push to master or pull_request merge with master
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_AUTH_TOKEN}}
