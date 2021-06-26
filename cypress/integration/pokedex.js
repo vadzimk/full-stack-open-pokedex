@@ -7,8 +7,10 @@ describe('Pokedex', function () {
   })
 
   it('can navigate from front page to ivysaur page', function (){
-    cy.visit('http://localhost:5000/pokemon/bulbasaur')
+    cy.visit('http://localhost:5000')
+    cy.contains('bulbasaur').click()
     cy.contains('bulbasaur')
+    cy.contains('overgrow')
     cy.contains('Pokémon and Pokémon character names are trademarks of Nintendo.')
   })
 })
