@@ -33,4 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_AUTH_TOKEN}}
           heroku_app_name: "pokedex-zim"
           heroku_email: "vadzimkk@gmail.com"
+          healthcheck: "pokedex-zim.herokuapp.com/health"
 
