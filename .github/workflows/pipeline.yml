@@ -40,7 +40,7 @@ jobs:
           healthcheck: "https://pokedex-zim.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
-      - uses: actions/checkout@v2  # fix tag not created properly
+      - uses: actions/checkout@v2  # this is here to fix "tag not created properly"
       - name: bump version and push tag
         if: ${{ github.event_name == 'push'}}  # runs only on push to master or pull_request merge with master
         uses: anothrNick/github-tag-action@1.33.0
