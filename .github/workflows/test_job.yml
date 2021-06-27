@@ -36,7 +36,7 @@ jobs:
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-          if: ${{ github.event_name == 'push' && success() }} # Pick up events even if the job fails or is canceled.
+          if: ${{ success() }} # Pick up events even if the job fails or is canceled.
       - name: notify onFailure
         uses: 8398a7/action-slack@v3  # slack notification
         with:
@@ -44,4 +44,4 @@ jobs:
           fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-          if: ${{ github.event_name == 'push' && !success() }} # Pick up events even if the job fails or is canceled.
+          if: ${{ !success() }} # Pick up events even if the job fails or is canceled.
