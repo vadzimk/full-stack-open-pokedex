@@ -3,9 +3,9 @@ name: Deployment pipeline
 on:
   push:
     branches:
-      - main # TODO change to master
+      - master # TODO change to master
   pull_request:
-    branches: [ main ]  # TODO change to master
+    branches: [ master ]  # TODO change to master
     types: [ opened, synchronize ] #    will run on pull request
 
 jobs:
