@@ -40,28 +40,35 @@ jobs:
           healthcheck: "https://pokedex-zim.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
-  - name: notify onSuccess
-      if: ${{ github.event_name == 'push' && success() }} # Pick up events even if the job fails or is canceled.
-      uses: 8398a7/action-slack@v3  # slack notification
-      with:
-        status: custom  #------
-        fields: commit, author, took
-        custom_payload: |
-          {
-          attachments: [{
-          color: 'good',
-          text: `a new version deployed to https://pokedex-zim.herokuapp.com/ (${process.env.AS_COMMIT})by ${process.env.AS_AUTHOR}\nbuild took ${process.env.AS_TOOK}`
-          }]
-          }
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+#      - uses: actions/checkout@v2  # this is here to fix "tag not created properly"
+#      - name: bump version and push tag
+#        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip')}}  # runs only on push to master or pull_request merge with master, skips when message contains #skip
+#        uses: anothrNick/github-tag-action@1.33.0
+#        env:
+#          GIHUB_TOKEN: ${{secrets.BUMP_VERSION}}
+#          DEFAULT_BUMP: 'patch'  # for major.minor.patch version number
+      - name: notify onSuccess
+        if: ${{ github.event_name == 'push' && success() }} # Pick up events even if the job fails or is canceled.
+        uses: 8398a7/action-slack@v3  # slack notification
+        with:
+          status: custom  #------
+          fields: commit, author, took
+          custom_payload: |
+            {
+              attachments: [{
+              color: 'good',
+              text: `a new version deployed to https://pokedex-zim.herokuapp.com/ (${process.env.AS_COMMIT})by ${process.env.AS_AUTHOR}\nbuild took ${process.env.AS_TOOK}`
+              }]
+              }
+          env:
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
       - name: notify onFailure
         if: ${{ github.event_name == 'push' && !success() }} # Pick up events even if the job fails or is canceled.
         uses: 8398a7/action-slack@v3  # slack notification
         with:
           status: ${{ job.status }}
           fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+          env:
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
 
 
