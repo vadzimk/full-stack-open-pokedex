@@ -45,7 +45,7 @@ jobs:
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip')}}  # runs only on push to master or pull_request merge with master, skips when message contains #skip
         uses: anothrNick/github-tag-action@1.33.0
         env:
-          GIHUB_TOKEN: ${{secrets.BUMP_VERSION}}  # https://docs.github.com/en/actions/reference/authentication-in-a-workflow
+          GIHUB_TOKEN: ${{secrets.BUMP_VERSION}}
           DEFAULT_BUMP: 'patch'  # for major.minor.patch version number
   - name: notify onSuccess
       if: ${{ github.event_name == 'push' && success() }} # Pick up events even if the job fails or is canceled.
