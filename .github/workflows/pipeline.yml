@@ -44,6 +44,6 @@ jobs:
         if: ${{ github.event_name == 'push'}}  # runs only on push to master or pull_request merge with master
         uses: anothrNick/github-tag-action@1.33.0
         env:
-          GIHUB_TOKEN: ${{secrets.HEROKU_AUTH_TOKEN}}  # secrets is stored in github repo
+          GIHUB_TOKEN: ${{secrets.GITHUB_TOKEN }}  # secrets is stored in github repo
           DEFAULT_BUMP: patch  # for major.minor.patch version number
 
